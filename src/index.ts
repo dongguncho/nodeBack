@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import express from 'express';
+import { createServer } from 'http';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -11,12 +12,14 @@ import { initializeTypeORM } from './config/typeorm';
 import { errorHandler } from './middleware/errorHandler';
 import { setupRoutes } from './routes';
 import { createSwaggerSpec } from './config/swagger';
+import { SocketService } from './services/socketService';
 
 // 환경 변수 로드
 dotenv.config();
 
 const app = express();
-const port = Number(process.env.PORT) || 3000;
+const server = createServer(app);
+const port = Number(process.env.PORT) || 8080;
 
 // Swagger 설정
 const swaggerSpec = createSwaggerSpec(port);
@@ -27,6 +30,7 @@ app.use(cors()); // CORS 설정
 app.use(morgan('combined')); // 로깅
 app.use(express.json()); // JSON 파싱
 app.use(express.urlencoded({ extended: true })); // URL 인코딩
+app.use(express.static('public')); // 정적 파일 서빙
 
 // Passport.js 초기화
 app.use(passport.initialize());
@@ -66,10 +70,14 @@ async function startServer() {
     // TypeORM 데이터베이스 초기화
     await initializeTypeORM();
     
+    // Socket.IO 서비스 초기화
+    new SocketService(server);
+    
     // 서버 시작
-    app.listen(port, () => {
+    server.listen(port, () => {
       console.log(`🚀 서버가 http://localhost:${port}에서 실행 중입니다`);
       console.log(`📚 Swagger 문서: http://localhost:${port}/api`);
+      console.log(`💬 Socket.IO 채팅 서비스가 활성화되었습니다`);
     });
   } catch (error) {
     console.error('❌ 서버 시작 실패:', error);

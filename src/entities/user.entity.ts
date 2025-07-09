@@ -1,17 +1,17 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('users')
 export class User {
-  @PrimaryColumn({ type: 'varchar', length: 36 })
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'datetime', precision: 6, name: 'created_at' })
+  @Column({ type: 'datetime', precision: 6, name: 'created_at', default: () => 'CURRENT_TIMESTAMP(6)' })
   createdAt: Date;
 
   @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
 
-  @Column({ type: 'bit', width: 1, name: 'is_active' })
+  @Column({ type: 'bit', width: 1, name: 'is_active', default: true })
   isActive: boolean;
 
   @Column({ type: 'varchar', length: 100 })
@@ -20,6 +20,6 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   password: string;
 
-  @Column({ type: 'datetime', precision: 6, name: 'updated_at' })
+  @Column({ type: 'datetime', precision: 6, name: 'updated_at', default: () => 'CURRENT_TIMESTAMP(6)', onUpdate: 'CURRENT_TIMESTAMP(6)' })
   updatedAt: Date;
 } 
