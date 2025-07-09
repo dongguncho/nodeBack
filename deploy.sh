@@ -38,4 +38,4 @@ echo "📋 애플리케이션 로그:"
 docker-compose -f docker-compose.prod.yml logs app
 
 echo "✅ 배포 완료!"
-echo "🌐 애플리케이션 접속: http://$(curl -s ifconfig.me)" 
+echo "🌐 애플리케이션 접속: http://$(curl -s ifconfig.me):8080" 
