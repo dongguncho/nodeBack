@@ -17,9 +17,9 @@ if [ ! -f .env ]; then
     fi
 fi
 
-# 도커 이미지 빌드
+# 도커 이미지 빌드 (캐시 없이)
 echo "📦 도커 이미지 빌드 중..."
-docker build -t nodeback:latest .
+docker build --no-cache -t nodeback:latest .
 
 # 기존 컨테이너 중지 및 삭제
 echo "🛑 기존 컨테이너 중지 중..."
