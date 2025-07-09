@@ -7,14 +7,14 @@ services:
       - "8080:8080"
     environment:
       - NODE_ENV=production
-      - DB_HOST=mysql
-      - DB_PORT=3306
-      - DB_USERNAME=${DB_USERNAME:-root}
-      - DB_PASSWORD=${DB_PASSWORD:-password}
-      - DB_DATABASE=${DB_DATABASE:-nodeback_db}
-      - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key-here}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - JWT_SECRET=${JWT_SECRET}
       - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-24h}
-      - PORT=3000
+      - PORT=${PORT:-8080}
     # RDS를 사용하므로 depends_on 제거
     restart: unless-stopped
     networks:
