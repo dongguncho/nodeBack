@@ -25,7 +25,7 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  synchronize: true, // 기존 테이블이 이미 완벽하게 맞춰져 있으므로 false로 설정
+  synchronize: false, // 기존 테이블이 이미 완벽하게 맞춰져 있으므로 false로 설정
   logging: process.env.NODE_ENV === 'development',
   entities: [User],
   subscribers: [],
