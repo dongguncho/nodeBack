@@ -1,6 +1,7 @@
 services:
   app:
     build: .
+    container_name: node-backend
     ports:
       - "8080:8080"  # 외부 포트 8080으로 매핑
     environment:
