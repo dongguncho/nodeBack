@@ -4,7 +4,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// 환경 변수 확인
+// 환경 변수 확인 및 출력
+console.log('=== TypeORM 환경 변수 확인 ===');
+console.log('DB_HOST:', process.env.DB_HOST);
+console.log('DB_USERNAME:', process.env.DB_USERNAME);
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? '***' : 'undefined');
+console.log('DB_DATABASE:', process.env.DB_DATABASE);
+
 if (!process.env.DB_HOST) {
   throw new Error('DB_HOST 환경 변수가 설정되지 않았습니다.');
 }

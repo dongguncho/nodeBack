@@ -36,6 +36,9 @@ COPY --from=builder /app/dist ./dist
 # Copy environment file template (for development)
 COPY env.example .env
 
+# Copy .env file if exists (for production)
+COPY .env .env.production
+
 # Change ownership to nodejs user
 RUN chown -R nodejs:nodejs /app
 

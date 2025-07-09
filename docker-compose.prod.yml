@@ -14,7 +14,7 @@ services:
       - DB_DATABASE=${DB_DATABASE}
       - JWT_SECRET=${JWT_SECRET}
       - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-24h}
-      - PORT=3000
+      - PORT=8080
     restart: unless-stopped
     networks:
       - app-network
