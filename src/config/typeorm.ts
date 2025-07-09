@@ -4,14 +4,28 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// 환경 변수 확인
+if (!process.env.DB_HOST) {
+  throw new Error('DB_HOST 환경 변수가 설정되지 않았습니다.');
+}
+if (!process.env.DB_USERNAME) {
+  throw new Error('DB_USERNAME 환경 변수가 설정되지 않았습니다.');
+}
+if (!process.env.DB_PASSWORD) {
+  throw new Error('DB_PASSWORD 환경 변수가 설정되지 않았습니다.');
+}
+if (!process.env.DB_DATABASE) {
+  throw new Error('DB_DATABASE 환경 변수가 설정되지 않았습니다.');
+}
+
 export const AppDataSource = new DataSource({
   type: 'mysql',
-  host: process.env.DB_HOST || 'localhost',
+  host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT) || 3306,
-  username: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'nurigun23!@',
-  database: process.env.DB_NAME || 'dbStudy',
-  synchronize: false, // 기존 테이블이 이미 완벽하게 맞춰져 있으므로 false로 설정
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  synchronize: true, // 기존 테이블이 이미 완벽하게 맞춰져 있으므로 false로 설정
   logging: process.env.NODE_ENV === 'development',
   entities: [User],
   subscribers: [],

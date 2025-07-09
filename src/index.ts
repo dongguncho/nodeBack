@@ -73,6 +73,13 @@ app.use(errorHandler);
 // 서버 시작
 async function startServer() {
   try {
+    // 환경 변수 디버깅
+    console.log('=== 환경 변수 확인 ===');
+    console.log('DB_HOST:', process.env.DB_HOST);
+    console.log('DB_USERNAME:', process.env.DB_USERNAME);
+    console.log('DB_DATABASE:', process.env.DB_DATABASE);
+    console.log('NODE_ENV:', process.env.NODE_ENV);
+    
     // TypeORM 데이터베이스 초기화
     await initializeTypeORM();
     
